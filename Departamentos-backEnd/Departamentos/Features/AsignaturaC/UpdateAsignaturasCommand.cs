@@ -13,7 +13,6 @@ namespace Departamentos.Controllers.AsignaturaC
 {
     public class UpdateAsignaturasCommand
     {
-        //Internal classes are named Query/Command, Validator, and Handler
         public class Command : IRequest<CommandResult>
         {
             public short Id { get; set; }
@@ -37,8 +36,9 @@ namespace Departamentos.Controllers.AsignaturaC
 
                 RuleFor(command => command.Id)
                     .NotEmpty()
+                        .WithMessage("Id no puede ser vacío.")
                     .NotNull()
-                    .WithMessage("Id no puede ser vacío.");
+                        .WithMessage("Id no puede ser vacío.");
 
                 RuleFor(command => command.Id)
                    .MustAsync(async (Id, cancelToken) =>
@@ -53,18 +53,28 @@ namespace Departamentos.Controllers.AsignaturaC
                        .WithMessage("Nombre no puede ser vacío.")
                    .NotNull()
                        .WithMessage("Nombre no puede ser vacío.");
+
                 RuleFor(command => command.Catedra)
                    .NotEmpty()
                        .WithMessage("Cátedra no puede ser vacío.")
                    .NotNull()
                        .WithMessage("Cátedra no puede ser vacío.");
+                
                 RuleFor(command => command)
                    .MustAsync(async (catedra, cancelToken) =>
                    {
                        return await _DatabaseContext.Catedras.AnyAsync
                        (element => element.Id == catedra.Catedra.Id);
                    })
-                       .WithMessage("Asignatura no encontrada.");
+                       .WithMessage("Catedra no encontrada.");
+
+                RuleFor(command => command)
+                   .MustAsync(async (asignatura, cancelToken) =>
+                   {
+                       return await _DatabaseContext.Asignaturas.AnyAsync
+                       (element => element.Id != asignatura.Id && element.Nombre == asignatura.Nombre);
+                   })
+                       .WithMessage("Ya existe una asignatura con ese nombre.");
             }
         }
 

@@ -68,9 +68,7 @@ namespace Departamentos
             services.AddIdentity<Usuarios, Roles>(options =>
             {
                 options.User.RequireUniqueEmail = false;
-            }
-
-               ).AddEntityFrameworkStores<DepartamentosContext>().AddDefaultTokenProviders();
+            }).AddEntityFrameworkStores<DepartamentosContext>().AddDefaultTokenProviders();
 
             ConfigureValidator(services);
 

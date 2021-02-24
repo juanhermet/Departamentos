@@ -22,7 +22,7 @@ namespace Departamentos.Infrastructure
         public virtual DbSet<EstadoCargo> EstadoCargos { get; set; }
         public virtual DbSet<EstadoTramite> EstadoTramites { get; set; }
         public virtual DbSet<EtapaTramite> EtapaTramites { get; set; }
-        public virtual DbSet<Nota> Notas { get; set; }
+        public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<Pase> Pases { get; set; }
         public virtual DbSet<ReferenciaDocente> ReferenciaDocentes { get; set; }
         public virtual DbSet<ReferenciaDocumento> ReferenciaDocumentos { get; set; }
@@ -52,7 +52,7 @@ namespace Departamentos.Infrastructure
             modelBuilder.Entity<EstadoCargo>().HasKey(key => key.Id);
             modelBuilder.Entity<EstadoTramite>().HasKey(key => key.Id);
             modelBuilder.Entity<EtapaTramite>().HasKey(key => key.Id);
-            modelBuilder.Entity<Nota>().HasKey(key => key.Id);
+            modelBuilder.Entity<Documento>().HasKey(key => key.Id);
             modelBuilder.Entity<Pase>().HasKey(key => key.Id);
             modelBuilder.Entity<ReferenciaDocente>().HasKey(key => key.Id);
             modelBuilder.Entity<ReferenciaDocumento>().HasKey(key => key.Id);

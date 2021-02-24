@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Departamentos.Infrastructure.Persistents.Entities
 {
-    public class Nota
+    public class Documento
     {
         public long Id { get; set; }
         public long Numero { get; set; }
-        public int Año { get; set; }
+        public int Anio { get; set; }
         public string DocNumeroOriginal { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaSalida { get; set; }
@@ -33,7 +33,7 @@ namespace Departamentos.Infrastructure.Persistents.Entities
         [ForeignKey("IdCargo")]
         public Cargo Cargo { get; set; }
     }
-    public class NotaDTO
+    public class DocumentoDTO
     {
         public long Numero { get; set; }
         public int Año { get; set; }

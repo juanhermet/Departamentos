@@ -15,7 +15,7 @@ namespace Departamentos.Infrastructure.Persistents.Entities
         public int IdDocente { get; set; }
         public short IdEstadoTramite { get; set; }
        [ForeignKey("IdDocumento")]
-        public Nota Documento { get; set; }
+        public Documento Documento { get; set; }
         [ForeignKey("IdDocente")]
         public Docente Docente { get; set; }
         [ForeignKey("IdEstadoTramite")]

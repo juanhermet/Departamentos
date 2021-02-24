@@ -17,7 +17,7 @@ namespace Departamentos.Infrastructure.Persistents.Entities
         public long IdPase { get; set; }
         public int IdDocente { get; set; }
         [ForeignKey("IdDocumento")]
-        public Nota Documento { get; set; }
+        public Documento Documento { get; set; }
         [ForeignKey("IdEntidadOrigen")]
         public Entidad EntidadOrigen { get; set; }
         [ForeignKey("IdEntidadDestino")]

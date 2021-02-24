@@ -9,18 +9,19 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Departamentos.Features.TipoDocumentoC
+namespace Departamentos.Features.ReferenciaEntidadC
 {
-    public class GetListOfTipoDocumentoQuery
+    public class GetListOfRefEntidadesQuery
     {
         public class QueryResult
         {
-            public List<TipoDocumentoDTO> TiposDocumentos { get; set; }
+            public List<ReferenciaEntidadDTO> ReferenciaEntidades { get; set; }
         }
 
         public class Query : IRequest<QueryResult>
         {
-            public string Tipo { get; set; }
+            public int? IdDocumento { get; set; }
+            public short? IdEntidadReferenciada { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, QueryResult>
@@ -36,17 +37,20 @@ namespace Departamentos.Features.TipoDocumentoC
 
             public async Task<QueryResult> Handle(Query request, CancellationToken cancellationToken)
             {
-                var Query = _DatabaseContext.TipoDocumentos.AsQueryable();
+                var Query = _DatabaseContext.ReferenciaEntidades.AsQueryable();
 
-                if (!string.IsNullOrEmpty(request.Tipo))
-                    Query = Query.Where(element => element.Tipo.Contains(request.Tipo));
+                if (request.IdDocumento.HasValue)
+                    Query = Query.Where(element => element.IdDocumento == request.IdDocumento);
+
+                if (request.IdEntidadReferenciada.HasValue)
+                    Query = Query.Where(element => element.IdEntidadReferenciada == request.IdEntidadReferenciada);
 
                 var result = await Query.ToListAsync();
-                var results = _mapper.Map<List<TipoDocumentoDTO>>(result);
+                var results = _mapper.Map<List<ReferenciaEntidadDTO>>(result);
 
                 return new QueryResult
                 {
-                    TiposDocumentos = results
+                    ReferenciaEntidades = results
                 };
             }
         }
@@ -55,7 +59,7 @@ namespace Departamentos.Features.TipoDocumentoC
         {
             public MappingProfile()
             {
-                CreateMap<TipoDocumento, TipoDocumentoDTO>();
+                CreateMap<ReferenciaEntidad, ReferenciaEntidadDTO>();
             }
         }
     }

@@ -15,14 +15,10 @@ namespace Departamentos.Controllers.AsignaturaC
         {
             public int Id { get; set; }
         }
-
         public class CommandValidator : AbstractValidator<Command>
         {
-            private DepartamentosContext _DatabaseContext;
-
-            public CommandValidator(DepartamentosContext databaseContext)
+            public CommandValidator()
             {
-                _DatabaseContext = databaseContext;
                 RuleFor(command => command.Id)
                     .NotEmpty()
                     .NotNull()

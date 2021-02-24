@@ -12,9 +12,9 @@ namespace Departamentos.Infrastructure.Persistents.Entities
         public long IdDocumento { get; set; }
         public long IdDocumentoReferenciado { get; set; }
         [ForeignKey("IdDocumento")]
-        public Nota Documento { get; set; }
+        public Documento Documento { get; set; }
         [ForeignKey("IdDocumentoReferenciado")]
-        public Nota DocumentoReferenciado { get; set; }
+        public Documento DocumentoReferenciado { get; set; }
     }
     public class ReferenciaDocumentoDTO
     {
